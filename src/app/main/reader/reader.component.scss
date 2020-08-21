@@ -1,0 +1,74 @@
+
+
+#app-reader {
+    display: block;
+}
+
+#camera-preview {
+    $margin: 25px;
+
+    width: 100%;
+    height: 40vh;
+    min-height: 200px;
+    background-color: transparent;
+    background-color: var(--ion-color-dark-contrast);
+    border-bottom: 1px solid var(--ion-color-light-shade);
+    text-align: center;
+    display: table;
+
+    #camera-text-content {
+        display: table-cell;
+        vertical-align: middle;
+        text-align: center;
+
+        ion-icon {
+            font-size: 3em;
+            margin: 8px;
+        }
+    
+        span {
+            display: block;
+            font-weight: lighter;
+        }
+    }
+}
+
+#camera-actions {
+    text-align: center;
+    height: 45px;
+    margin: auto;
+    margin-top: -45px;
+    width: fit-content;
+
+    ion-text {
+        float: left;
+        line-height: 40px;
+    }
+
+    ion-chip {
+        height: 30px;
+        width: 30px;
+        padding: 0;
+
+        ion-label {
+            margin: auto;
+        }
+    }
+}
+
+#scan-result {
+    padding: 12px;
+
+    .scan-result-title p {
+        margin: 8px 0 8px 0;
+
+        span {
+            position: absolute;
+            padding-left: 10px;
+        }
+    }
+
+    .scan-message {
+        
+    }
+}

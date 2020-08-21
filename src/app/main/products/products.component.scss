@@ -1,0 +1,25 @@
+$tabs-height: 57px;
+
+ion-list {
+    overflow-y: auto;
+    height: 100%;
+    margin-bottom: $tabs-height;
+    background-color: transparent;
+    
+    ion-avatar {
+        text-align: center;
+        display: table;
+        border: 2px solid var(--ion-color-light);
+        
+        ion-icon {
+            padding: 8px;
+            vertical-align: middle;
+            display: table-cell;
+        }
+    }
+}
+
+ion-tabs {
+    top: auto;
+    height: $tabs-height;
+}

@@ -1,0 +1,58 @@
+<ion-app *ngIf="user">
+  <ion-menu class="menu" side="start" menuId="first" contentId="main">
+    <div class="header">
+      <app-profile-picture></app-profile-picture>
+      <p class="profile-name">{{user.name}}</p>
+    </div>
+    <ion-content>
+      <ul class="menu-list">
+        <li class="menu-item" [class.selected]="route == '/reader'" [routerLink]="['/reader']">
+          <ion-router-link>
+            <ion-icon name="barcode-outline"></ion-icon>
+            <div class="item-description">Ler rótulo</div>
+          </ion-router-link>
+        </li> 
+        <li class="menu-item" [class.selected]="route == '/products'" [routerLink]="['/products']">
+          <ion-router-link>
+            <ion-icon name="list-outline"></ion-icon>
+            <div class="item-description">Produtos</div>
+          </ion-router-link>
+        </li>
+        <li class="menu-item" [routerLink]="['/reader']">
+          <ion-router-link>
+            <ion-icon name="settings-outline"></ion-icon>
+            <div class="item-description">Minhas preferências</div>
+          </ion-router-link>
+        </li>
+        <li class="menu-item" (click)="logout()">
+          <ion-router-link>
+            <ion-icon name="log-out-outline"></ion-icon>
+            <div class="item-description">Sair</div>
+          </ion-router-link>
+        </li>
+      </ul>
+    </ion-content>
+  </ion-menu>
+
+  <ion-header translucent>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-menu-button color="dark"></ion-menu-button>
+      </ion-buttons>
+      <ion-title>
+        <ion-text color="dark">
+          <ion-icon name="barcode-outline"></ion-icon>
+        </ion-text>
+      </ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content>
+    <!-- <ion-header collapse="condense">
+      <ion-toolbar>
+        <ion-title size="large">ok</ion-title>
+      </ion-toolbar>
+    </ion-header> -->
+    <ion-router-outlet id="main"></ion-router-outlet>
+  </ion-content>
+</ion-app>

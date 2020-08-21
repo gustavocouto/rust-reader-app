@@ -1,0 +1,55 @@
+<ion-content [fullscreen]="true">
+    <div class="content">
+        <div class="header">
+            <ion-text color="dark">
+                <h1>Registre-se</h1>
+            </ion-text>
+            <ion-text color="medium">
+                Fique sempre alerta com o menor esforço. Registre e compartilhe suas leituras!
+            </ion-text>
+        </div>
+        <ion-card>
+            <form #form="ngForm" (ngSubmit)="register(form)">
+                <ion-card-content>
+                    <app-profile-picture></app-profile-picture>
+                    <ion-item>
+                        <ion-label position="floating">Nome</ion-label>
+                        <ion-input type="text" name="name" required minlength="3" maxlength="100"
+                            ngModel #name="ngModel" placeholder="Como podemos lhe chamar?"></ion-input>
+                    </ion-item>
+
+                    <ion-item>
+                        <ion-label position="floating">Email</ion-label>
+                        <ion-input type="email" name="email" required minlength="3" maxlength="100" email="true"
+                            ngModel #email="ngModel" placeholder="Este será seu login"></ion-input>
+                    </ion-item>
+
+                    <ion-item>
+                        <ion-label position="floating">Senha</ion-label>
+                        <ion-input type="password" name="password" required minlength="3" maxlength="100"
+                            ngModel #password="ngModel" placeholder="Esta será sua senha"></ion-input>
+                    </ion-item>
+
+                    <ion-item>
+                        <ion-label position="floating">
+                            Repetir senha
+                            <ion-text *ngIf="confirmPassword.touched && confirmPassword.value != password.value"> - As senhas não coincidem</ion-text>
+                        </ion-label>
+                        <ion-input type="password" name="confirmPassword" required minlength="3" maxlength="100"
+                            ngModel #confirmPassword="ngModel" placeholder="Repita sua senha"></ion-input>
+                    </ion-item>
+                </ion-card-content>
+                <ion-card-content>
+                    <ion-button color="primary" expand="block" type="submit">
+                        Registrar
+                    </ion-button>
+                </ion-card-content>
+            </form>
+        </ion-card>
+        <div class="footer">
+            <ion-router-link [routerLink]="['/account/login']">Realize o login</ion-router-link>
+            <ion-text color="medium">ou</ion-text>
+            <ion-router-link>Acesse sem uma conta</ion-router-link>
+        </div>
+    </div>
+</ion-content>

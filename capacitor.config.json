@@ -1,0 +1,18 @@
+{
+  "appId": "io.ionic.starter",
+  "appName": "app",
+  "bundledWebRuntime": false,
+  "npmClient": "npm",
+  "webDir": "www",
+  "plugins": {
+    "SplashScreen": {
+      "launchShowDuration": 0
+    }
+  },
+  "cordova": {},
+  "linuxAndroidStudioPath": "/home/gustavocouto/android-studio/bin/studio.sh",
+  "server": {
+    "url": "http://192.168.2.117:8100",
+    "cleartext": true
+  }
+}

@@ -1,0 +1,28 @@
+.logo {
+    width: 100%;
+    text-align: center;
+}
+
+.content {
+    padding: 20px;
+}
+
+.content .header {
+    text-align: center;
+    margin: 0 0 30px 0;
+}
+
+.content .footer {
+    text-align: center;
+}
+
+app-profile-picture {
+    display: block;
+    margin-top: 10px;
+    padding-bottom: 10px;
+}
+
+ion-router-link {
+    padding: 8px;
+    display: block;
+}

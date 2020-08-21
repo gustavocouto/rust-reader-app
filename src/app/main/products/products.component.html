@@ -1,0 +1,30 @@
+<ion-searchbar color="light"></ion-searchbar>
+<ion-list lines="none">
+  <ion-item *ngFor="let product of products" color="dark-contrast">
+    <ion-avatar slot="start">
+      <ion-icon name="cube-outline"></ion-icon>
+    </ion-avatar>
+    <ion-label>
+      <h2>{{product.name}}</h2>
+      <h3>I'm a big deal</h3>
+      <p>Listen, I've had a pretty messed up day...</p>
+    </ion-label>
+  </ion-item>
+</ion-list>
+
+<ion-tabs>
+  <ion-tab-bar slot="bottom">
+    <ion-tab-button tab="schedule"
+      [color.dark]="strict == 'self'"
+      (click)="changeStrict('self')">
+      <ion-icon name="list-outline" size="small"></ion-icon>
+      <ion-label>Meus Produtos</ion-label>
+    </ion-tab-button>
+    <ion-tab-button tab="speakers"
+      [color.dark]="strict == 'other'"
+      (click)="changeStrict('other')">
+      <ion-icon name="search-outline" size="small"></ion-icon>
+      <ion-label>Encontrar Produtos</ion-label>
+    </ion-tab-button>
+  </ion-tab-bar>
+</ion-tabs>
