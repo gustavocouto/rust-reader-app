@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { pathToFileURL } from 'url';
 import { ReaderComponent } from './reader/reader.component';
-import { ProductsComponent } from './products/products.component';
+import { LabelsComponent } from './labels/labels.component';
 
 const routes: Routes = [
   {
@@ -15,8 +15,8 @@ const routes: Routes = [
     component: ReaderComponent
   },
   {
-    path: 'products',
-    component: ProductsComponent
+    path: 'labels',
+    component: LabelsComponent
   }
 ];
 

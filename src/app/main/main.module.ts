@@ -10,7 +10,7 @@ import { MainComponent } from './main.component';
 import { ProfilePictureComponent } from '../components/profile-picture/profile-picture.component';
 import { Camera } from '@ionic-native/camera/ngx';
 import { CommonModule } from '@angular/common';
-import { ProductsComponent } from './products/products.component';
+import { LabelsComponent } from './labels/labels.component';
 
 @NgModule({
   entryComponents: [],
@@ -28,7 +28,7 @@ import { ProductsComponent } from './products/products.component';
   declarations: [
     MainComponent,
     ReaderComponent,
-    ProductsComponent,
+    LabelsComponent,
     ProfilePictureComponent
   ],
   bootstrap: [MainComponent]

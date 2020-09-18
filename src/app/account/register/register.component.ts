@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ToastController } from '@ionic/angular';
-import { AccountService } from 'src/app/services/account.service';
+import { ApiService } from 'src/app/services/api.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
 export class RegisterComponent implements OnInit {
   constructor(
     private _router: Router,
-    private _accountService: AccountService
+    private _accountService: ApiService
   ) { }
 
   ngOnInit() {}

@@ -14,17 +14,13 @@
 
 <ion-tabs>
   <ion-tab-bar slot="bottom">
-    <ion-tab-button tab="schedule"
-      [color.dark]="strict == 'self'"
-      (click)="changeStrict('self')">
-      <ion-icon name="list-outline" size="small"></ion-icon>
-      <ion-label>Meus Produtos</ion-label>
+    <ion-tab-button (click)="changeStrict('me')">
+      <ion-icon [color]="strict == 'me' ? 'dark' : ''" name="list-outline" size="small"></ion-icon>
+      <ion-label [color]="strict == 'me' ? 'dark' : ''">Meus Produtos</ion-label>
     </ion-tab-button>
-    <ion-tab-button tab="speakers"
-      [color.dark]="strict == 'other'"
-      (click)="changeStrict('other')">
-      <ion-icon name="search-outline" size="small"></ion-icon>
-      <ion-label>Encontrar Produtos</ion-label>
+    <ion-tab-button (click)="changeStrict('all')">
+      <ion-icon [color]="strict == 'all' ? 'dark' : ''" name="search-outline" size="small"></ion-icon>
+      <ion-label [color]="strict == 'all' ? 'dark' : ''">Encontrar Produtos</ion-label>
     </ion-tab-button>
   </ion-tab-bar>
 </ion-tabs>

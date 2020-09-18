@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { MenuController } from '@ionic/angular';
 import { ContextService } from '../services/context.service';
 import { Router, NavigationEnd } from '@angular/router';
-import { StorageService } from '../services/storage.service';
-import { User } from '../models/User';
+import { IUser } from '../interfaces/IUser';
+import { MenuController } from '@ionic/angular';
 
 @Component({
   selector: 'main-root',
@@ -11,31 +10,35 @@ import { User } from '../models/User';
   styleUrls: ['main.component.scss']
 })
 export class MainComponent implements OnInit {
-  user: User
+  user: IUser
   route: string
 
   constructor(
     private _router: Router,
-    private _storageService: StorageService,
+    private _menu: MenuController,
     private _contextService: ContextService) {
     _router.events.subscribe(e => {
-      if(e instanceof NavigationEnd)
+      if (e instanceof NavigationEnd) {
         this.route = e.url
+        _menu.close()
+      }
     })
-    
+
     this.initializeApp()
   }
 
   async initializeApp() {
     // const user = await this._storageService.getUser()
-    const user = new User()
-    user.id = '123'
-    user.email = 'email@email.com'
-    user.name = 'Test User'
-    if(user) { 
+    const user: IUser = { _id: '5f41af5f1fa501e63344ec36', email: 'email@email.com', name: 'Test User', priority_allergenics: [
+      { id: '5', name: 'Compound 5' }
+    ]}
+
+    if (user) {
       this.user = user
+      this._contextService.storage.setUser(user)
+      this._contextService.storage.setToken(user._id)
     } else {
-      this._storageService.clear()
+      this._contextService.storage.clear()
       this._router.navigateByUrl('/account/login')
     }
   }
@@ -45,7 +48,7 @@ export class MainComponent implements OnInit {
   }
 
   logout() {
-    this._storageService.clear()
+    this._contextService.storage.clear()
     this._router.navigateByUrl('/account/login')
   }
 }

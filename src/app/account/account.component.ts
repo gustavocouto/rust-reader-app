@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { StorageService } from '../services/storage.service';
-import { User } from '../models/User';
+import { IUser } from '../interfaces/IUser';
 
 @Component({
   selector: 'app-account',

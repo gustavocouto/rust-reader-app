@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { User } from '../models/User';
+import { IUser } from '../interfaces/IUser';
 import { StorageService } from './storage.service';
 import { plainToClass, classToPlain } from 'class-transformer';
 import { Subject } from 'rxjs';
@@ -8,14 +8,14 @@ import { Subject } from 'rxjs';
     providedIn: 'root'
 })
 export class ContextService {
-    private _onChange = new Subject<boolean>()
-    onChange = this._onChange.asObservable()
+    private _onLoadingChange = new Subject<boolean>()
+    onLoadingChange = this._onLoadingChange.asObservable()
 
-    constructor() {
+    constructor(public storage: StorageService) {
 
     }
 
     setLoading(loading: boolean) {
-        this._onChange.next(loading)
+        this._onLoadingChange.next(loading)
     }
 }

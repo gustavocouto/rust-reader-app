@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage';
-import { User } from '../models/User';
-import { classToPlain, plainToClass } from 'class-transformer';
+import { IUser } from '../interfaces/IUser';
 
 @Injectable({
     providedIn: 'root'
@@ -15,9 +14,9 @@ export class StorageService {
 
     async setToken(token: string) { await this._storage.set('to', token) }
 
-    async getUser(): Promise<User> { return plainToClass(User, await this._storage.get('usr')) }
+    async getUser(): Promise<IUser> { return await this._storage.get('usr') }
 
-    async setUser(user: User) { await this._storage.set('usr', classToPlain(user)) }
+    async setUser(user: IUser) { await this._storage.set('usr', user) }
 
     async clear() { await this._storage.clear() }
 }

@@ -4,6 +4,11 @@
 
 export const environment = {
   production: false,
+  readThreshold: {
+    match: [0.85, 1],
+    undef: [0.75, 0.85],
+    unmatch: [0, 0.75]
+  },
   apiUrl: 'http://127.0.0.1:5000/api'
 };
 

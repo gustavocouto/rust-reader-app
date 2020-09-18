@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {  NgForm } from '@angular/forms';
-import { AccountService } from 'src/app/services/account.service';
+import { ApiService } from 'src/app/services/api.service';
 import { StorageService } from 'src/app/services/storage.service';
 import { Router } from '@angular/router';
 
@@ -13,7 +13,7 @@ export class LoginComponent implements OnInit {
   constructor(
     private _router: Router,
     private _storageService: StorageService,
-    private _accountService: AccountService
+    private _accountService: ApiService
   ) {
 
   }
