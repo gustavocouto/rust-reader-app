@@ -14,11 +14,11 @@
         </li> 
         <li class="menu-item" [class.selected]="route == '/labels'" [routerLink]="['/labels']">
           <ion-router-link>
-            <ion-icon name="list-outline"></ion-icon>
+            <ion-icon name="cube-outline"></ion-icon>
             <div class="item-description">Produtos</div>
           </ion-router-link>
         </li>
-        <li class="menu-item" [routerLink]="['/reader']">
+        <li class="menu-item" [routerLink]="['/settings']">
           <ion-router-link>
             <ion-icon name="settings-outline"></ion-icon>
             <div class="item-description">Minhas preferências</div>
@@ -41,7 +41,7 @@
       </ion-buttons>
       <ion-title>
         <ion-text color="dark">
-          <ion-icon name="barcode-outline"></ion-icon>
+          <ion-icon [name]="route_icons[route] || 'barcode-outline'"></ion-icon>
         </ion-text>
       </ion-title>
     </ion-toolbar>

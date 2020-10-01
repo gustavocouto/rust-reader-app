@@ -12,8 +12,8 @@
     <div id="camera-actions" *ngIf="scanned_file">
         <ion-item>
             <ion-icon
-                (click)="!scanning && compound_reads.length && save()"
-                [color]="!scanning && compound_reads.length ? 'success' : ''" slot="end"
+                (click)="!scanning && ingredient_reads.length && save()"
+                [color]="!scanning && ingredient_reads.length ? 'success' : ''" slot="end"
                 name="checkmark-circle-outline"></ion-icon>
             <ion-icon
                 (click)="clearScan()"
@@ -32,25 +32,13 @@
             <p><ion-icon name="search-outline"></ion-icon></p>
             <p><span>Analisando resultados...</span></p>
         </ion-text>
-        <ion-text *ngIf="scanned_file && !compound_reads.length && !scanning" color="light" class="scan-result-title">
+        <ion-text *ngIf="scanned_file && !ingredient_reads.length && !scanning" color="light" class="scan-result-title">
             <p><ion-icon name="sad-outline"></ion-icon></p>
             <p><span>A análise não gerou resultados. Tente realizar o scan novamente.</span></p>
         </ion-text>
-        <ion-list *ngIf="scanned_file && compound_reads.length" class="read-list" lines="full">
-            <ion-item *ngFor="let read of getSortedCompounds()" color="light">
-                <ion-label>
-                    <p>{{read.name}}</p>
-                    <small>
-                        <ion-text color="medium">{{read.best_match.name}}</ion-text>
-                        <span *ngIf="isPriorityAllergenic(read.best_match.name)" class="bookmark">
-                            <ion-icon color="danger" name="pricetag-outline"></ion-icon>
-                        </span>
-                        <ion-text [color]="getAccuracyColor(read)" class="accuracy">
-                            {{read.accuracy | percent}}
-                        </ion-text>
-                    </small>
-                </ion-label>
-            </ion-item>
-        </ion-list>
+        <app-ingredient-list
+            *ngIf="scanned_file && ingredient_reads.length"
+            [ingredient_reads]="ingredient_reads">
+        </app-ingredient-list>
     </div>
 </div>

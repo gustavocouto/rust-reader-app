@@ -1,9 +1,10 @@
 import { IUser } from './IUser'
-import { ICompound } from './ICompound'
-import { ICompoundRead } from './ICompoundRead'
+import { IIngredient } from './IIngredient'
+import { IIngredientRead } from './IIngredientRead'
 
 export interface ILabel {
     name: string
     user?: IUser
-    compounds: ICompoundRead[]
+    ingredients: IIngredientRead[]
+    created?: Date
 }

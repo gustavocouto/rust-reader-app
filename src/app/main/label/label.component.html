@@ -1,0 +1,29 @@
+<ion-header translucent>
+  <ion-toolbar>
+    <ion-title>Detalhes do Rótulo</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="dismissModal()">Voltar</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content fullscreen>
+  <div class="content-header" *ngIf="label">
+    <ion-text>
+      <h2>{{label.name}}</h2>
+    </ion-text>
+    <ion-text color="medium">
+      <p>Por <strong>{{label.user.name}}</strong></p>
+    </ion-text>
+    <ion-text color="medium">
+      <p>Em <strong>{{label.created | date: 'longDate'}}</strong></p>
+    </ion-text>
+    <p>
+      <ion-chip color="danger" (click)="delete(label.id)">
+        <ion-icon name="trash"></ion-icon>
+        <ion-label>Excluir</ion-label>
+      </ion-chip>
+    </p>
+    <app-ingredient-list
+      [ingredient_reads]="label.ingredients"></app-ingredient-list>
+  </div>
+</ion-content>

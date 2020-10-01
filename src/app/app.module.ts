@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
@@ -9,6 +9,7 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AppHttpInterceptor } from './app-http.interceptor';
+import { StartupService } from './services/startup.service';
 
 @NgModule({
   entryComponents: [],
@@ -22,8 +23,10 @@ import { AppHttpInterceptor } from './app-http.interceptor';
   providers: [
     StatusBar,
     SplashScreen,
+    StartupService,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    { provide: HTTP_INTERCEPTORS, useClass: AppHttpInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: AppHttpInterceptor, multi: true },
+    { provide: APP_INITIALIZER, useFactory: (ss: StartupService) => () => ss.load(), deps: [StartupService], multi: true }
   ],
   bootstrap: [
     AppComponent

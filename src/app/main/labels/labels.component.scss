@@ -5,17 +5,27 @@ ion-list {
     height: 100%;
     margin-bottom: $tabs-height;
     background-color: transparent;
+
+    .label-user-name,
+    .label-date {
+        font-weight: bold;
+        font-style: italic;
+    }
     
-    ion-avatar {
-        text-align: center;
-        display: table;
-        border: 2px solid var(--ion-color-light);
+    // ion-avatar {
+    //     text-align: center;
+    //     display: table;
+    //     border: 2px solid var(--ion-color-light);
         
-        ion-icon {
-            padding: 8px;
-            vertical-align: middle;
-            display: table-cell;
-        }
+    //     ion-icon {
+    //         padding: 8px;
+    //         vertical-align: middle;
+    //         display: table-cell;
+    //     }
+    // }
+
+    .bookmark {
+        margin-right: 5px;
     }
 }
 

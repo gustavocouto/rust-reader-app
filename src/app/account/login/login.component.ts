@@ -3,6 +3,7 @@ import {  NgForm } from '@angular/forms';
 import { ApiService } from 'src/app/services/api.service';
 import { StorageService } from 'src/app/services/storage.service';
 import { Router } from '@angular/router';
+import { ContextService } from 'src/app/services/context.service';
 
 @Component({
   selector: 'app-login',
@@ -12,7 +13,7 @@ import { Router } from '@angular/router';
 export class LoginComponent implements OnInit {
   constructor(
     private _router: Router,
-    private _storageService: StorageService,
+    private _contextService: ContextService,
     private _accountService: ApiService
   ) {
 
@@ -26,8 +27,9 @@ export class LoginComponent implements OnInit {
 
     this._accountService
       .auth(form.value.email, form.value.password)
-      .subscribe(user => {
-        this._storageService.setUser(user)
+      .subscribe(async response => {
+        await this._contextService.changeUser(response.user)
+        await this._contextService.storage.setToken(response.token)
         this._router.navigateByUrl('/')
       })
   }

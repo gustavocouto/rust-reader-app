@@ -1,13 +1,26 @@
-<ion-searchbar color="light"></ion-searchbar>
+<ion-searchbar color="light" placeholder="Buscar"
+  (ionChange)="filter($event.target.value)" debounce="250"></ion-searchbar>
 <ion-list lines="none">
-  <ion-item *ngFor="let product of products" color="dark-contrast">
-    <ion-avatar slot="start">
-      <ion-icon name="cube-outline"></ion-icon>
-    </ion-avatar>
+  <ion-item *ngFor="let label of labels"
+    (click)="viewLabel(label.id)"
+    color="dark-contrast">
     <ion-label>
-      <h2>{{product.name}}</h2>
-      <h3>I'm a big deal</h3>
-      <p>Listen, I've had a pretty messed up day...</p>
+      <h2>{{label.name}}</h2>
+      <p>
+        <ion-text color="medium">
+          Por <span class="label-user-name">{{label.user.name}}</span>,
+          em <span class="label-date">{{label.created | date: 'dd LLLL'}}</span>
+        </ion-text>
+      </p>
+      <p>
+        <ion-text color="medium">
+          <strong>{{label.ingredients?.length}}</strong>
+          compostos identificados<ion-text color="medium">, </ion-text>
+        </ion-text>
+        <ion-text color="danger">
+          <strong>{{countRelevantIngredients(label)}}</strong> relevantes
+        </ion-text>
+      </p>
     </ion-label>
   </ion-item>
 </ion-list>
@@ -15,12 +28,12 @@
 <ion-tabs>
   <ion-tab-bar slot="bottom">
     <ion-tab-button (click)="changeStrict('me')">
-      <ion-icon [color]="strict == 'me' ? 'dark' : ''" name="list-outline" size="small"></ion-icon>
-      <ion-label [color]="strict == 'me' ? 'dark' : ''">Meus Produtos</ion-label>
+      <ion-icon [color]="strict == 'me' ? 'primary' : ''" name="list-outline" size="small"></ion-icon>
+      <ion-label [color]="strict == 'me' ? 'primary' : ''">Meus Produtos</ion-label>
     </ion-tab-button>
     <ion-tab-button (click)="changeStrict('all')">
-      <ion-icon [color]="strict == 'all' ? 'dark' : ''" name="search-outline" size="small"></ion-icon>
-      <ion-label [color]="strict == 'all' ? 'dark' : ''">Encontrar Produtos</ion-label>
+      <ion-icon [color]="strict == 'all' ? 'primary' : ''" name="search-outline" size="small"></ion-icon>
+      <ion-label [color]="strict == 'all' ? 'primary' : ''">Encontrar Produtos</ion-label>
     </ion-tab-button>
   </ion-tab-bar>
 </ion-tabs>

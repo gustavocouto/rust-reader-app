@@ -3,6 +3,8 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { pathToFileURL } from 'url';
 import { ReaderComponent } from './reader/reader.component';
 import { LabelsComponent } from './labels/labels.component';
+import { LabelComponent } from './label/label.component';
+import { SettingsComponent } from './settings/settings.component';
 
 const routes: Routes = [
   {
@@ -17,6 +19,19 @@ const routes: Routes = [
   {
     path: 'labels',
     component: LabelsComponent
+  },
+  {
+    path: 'labels/:id',
+    component: LabelComponent
+  },
+  {
+    path: 'settings',
+    component: SettingsComponent
+  },
+  {
+    path: '*',
+    redirectTo: '/reader',
+    pathMatch: 'full'
   }
 ];
 

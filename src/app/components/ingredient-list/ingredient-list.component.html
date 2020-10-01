@@ -1,0 +1,16 @@
+<ion-list class="read-list" lines="full">
+  <ion-item *ngFor="let read of getSortedIngredients()" color="light">
+      <ion-label>
+          <p>{{read.name}}</p>
+          <small>
+              <ion-text color="medium">{{read.best_match?.name || '-'}}</ion-text>
+              <span *ngIf="isPriorityAllergenic(read.best_match?.name) || isPriorityAllergenic(read.best_match?.derived_from?.name)" class="bookmark">
+                  <ion-icon color="danger" name="skull-outline"></ion-icon>
+              </span>
+              <ion-text [color]="getAccuracyColor(read)" class="accuracy">
+                  {{read.accuracy | percent}}
+              </ion-text>
+          </small>
+      </ion-label>
+  </ion-item>
+</ion-list>

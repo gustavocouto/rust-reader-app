@@ -12,6 +12,11 @@ import { MenuController } from '@ionic/angular';
 export class MainComponent implements OnInit {
   user: IUser
   route: string
+  route_icons = {
+    '/reader': 'barcode-outline',
+    '/labels': 'cube-outline',
+    '/settings': 'settings-outline'
+  }
 
   constructor(
     private _router: Router,
@@ -28,19 +33,7 @@ export class MainComponent implements OnInit {
   }
 
   async initializeApp() {
-    // const user = await this._storageService.getUser()
-    const user: IUser = { _id: '5f41af5f1fa501e63344ec36', email: 'email@email.com', name: 'Test User', priority_allergenics: [
-      { id: '5', name: 'Compound 5' }
-    ]}
-
-    if (user) {
-      this.user = user
-      this._contextService.storage.setUser(user)
-      this._contextService.storage.setToken(user._id)
-    } else {
-      this._contextService.storage.clear()
-      this._router.navigateByUrl('/account/login')
-    }
+    this.user = await this._contextService.user
   }
 
   ngOnInit() {
