@@ -14,34 +14,36 @@ import { LabelComponent } from '../label/label.component';
 export class LabelsComponent implements OnInit {
   strict: 'all' | 'me' = 'me'
   labels: ILabel[]
+  lastSearch: string
+  searched: boolean = false
+  loading: boolean = false
 
   constructor(
     private _apiService: ApiService,
     private _modalController: ModalController
   ) {
-
   }
 
-  ngOnInit() {
-    this.filter()
+  async ngOnInit() {
+    await this.filter()
   }
 
-  filter(search?: string) {
-    this._apiService
-      .getLabels(this.strict, search)
-      .subscribe(labels => this.labels = labels)
+  private async filter(search?: string) {
+    this.lastSearch = search
+    this.labels = await this._apiService.getLabels(this.strict, search).toPromise()
+    this.searched = true
   }
 
-  countRelevantIngredients(label: ILabel) {
+  public countRelevantIngredients(label: ILabel) {
     return label.ingredients.filter(_ => _.accuracy > environment.readThreshold.undef[0]).length
   }
 
-  changeStrict(strict) {
+  public changeStrict(strict) {
     this.strict = strict
     this.filter()
   }
 
-  async viewLabel(id: string) {
+  public async viewLabel(id: string) {
     const modal = await this._modalController.create({
       component: LabelComponent,
       componentProps: {
@@ -51,5 +53,8 @@ export class LabelsComponent implements OnInit {
     })
 
     await modal.present()
+    const { data } = await modal.onWillDismiss()
+    if(data.deleted)
+      this.filter(this.lastSearch)
   }
 }

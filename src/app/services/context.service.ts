@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { IUser } from '../interfaces/IUser';
 import { StorageService } from './storage.service';
 import { Subject } from 'rxjs';
+import { IIngredient } from '../interfaces/IIngredient';
 
 @Injectable({
     providedIn: 'root'
@@ -13,6 +14,7 @@ export class ContextService {
     onUserChange = this._onUserChange.asObservable()
 
     public user: IUser
+    public ingredients: IIngredient[] = []
 
     constructor(public storage: StorageService) {
 

@@ -1,16 +1,26 @@
 <ion-list class="read-list" lines="full">
-  <ion-item *ngFor="let read of getSortedIngredients()" color="light">
-      <ion-label>
-          <p>{{read.name}}</p>
-          <small>
-              <ion-text color="medium">{{read.best_match?.name || '-'}}</ion-text>
-              <span *ngIf="isPriorityAllergenic(read.best_match?.name) || isPriorityAllergenic(read.best_match?.derived_from?.name)" class="bookmark">
-                  <ion-icon color="danger" name="skull-outline"></ion-icon>
-              </span>
-              <ion-text [color]="getAccuracyColor(read)" class="accuracy">
-                  {{read.accuracy | percent}}
-              </ion-text>
-          </small>
-      </ion-label>
-  </ion-item>
+    <ng-container *ngIf="getSortedIngredients().length; else emptyread">
+        <ion-item color="light" *ngFor="let read of getSortedIngredients()">
+            <ion-label>
+                <p>{{read.name}}</p>
+                <small>
+                    <ion-text color="medium">{{read.best_match?.name || '-'}}</ion-text>
+                    <span
+                        *ngIf="isPriorityAllergenic(read.best_match?.name) || isPriorityAllergenic(read.best_match?.derived_from?.name)"
+                        class="bookmark">
+                        <ion-icon color="danger" name="skull-outline"></ion-icon>
+                    </span>
+                    <ion-text [color]="getAccuracyColor(read)" class="accuracy">
+                        {{read.accuracy}}
+                    </ion-text>
+                </small>
+            </ion-label>
+        </ion-item>
+    </ng-container>
+    <ng-template #emptyread>
+        <ion-text color="dark" class="scan-result-title">
+            <p><ion-icon name="alert-circle-outline"></ion-icon></p>
+            <p><span>A análise não encontrou resultados relevantes.</span></p>
+        </ion-text>
+    </ng-template>
 </ion-list>

@@ -6,6 +6,8 @@ import { ILabel } from '../interfaces/ILabel';
 import { IIngredientRead } from '../interfaces/IIngredientRead';
 import { map } from 'rxjs/operators';
 import { IIngredient } from '../interfaces/IIngredient';
+import { registerLocaleData } from '@angular/common';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
     providedIn: 'root'
@@ -29,20 +31,37 @@ export class ApiService {
 
     getLabel(id: string): Observable<ILabel> {
         return this._http.get<ILabel>(`/labels/${id}`)
+            .pipe(map(label => {
+                const nullVal = environment.readThreshold.unmatch[0]
+                for(let read of label.ingredients)
+                    read.accuracy = read.accuracy === null ? nullVal : read.accuracy
+                
+                return label
+            }))
     }
 
     getLabels(strict: 'all' | 'me', search?: string): Observable<ILabel[]> {
         return this._http.get<ILabel[]>('/labels', { params: { strict, search: search || '' } })
     }
 
-    readImage(file: File): Observable<IIngredientRead[]> {
+    readImageAsText(file: File): Observable<string> {
         const headers = new HttpHeaders()
         const formData = new FormData()
         headers.append('Content-Type', 'multipart/form-data')
         headers.append('Accept', 'application/json')
         formData.append('image', file, file.name)
 
-        return this._http.post<IIngredientRead[]>('/read', formData, {headers})
+        return this._http.post<string>('/read-text', formData, {headers})
+    }
+
+    readImageAsIngredients(file: File): Observable<IIngredientRead[]> {
+        const headers = new HttpHeaders()
+        const formData = new FormData()
+        headers.append('Content-Type', 'multipart/form-data')
+        headers.append('Accept', 'application/json')
+        formData.append('image', file, file.name)
+
+        return this._http.post<IIngredientRead[]>('/read-ingredients', formData, {headers})
     }
 
     addLabel(label: ILabel): Observable<any> {
@@ -51,6 +70,21 @@ export class ApiService {
 
     deleteLabel(id: string): Observable<any> {
         return this._http.delete<any>(`/labels/${id}`)
+    }
+
+    getAllIngredients(): Observable<IIngredient[]> {
+        return this._http.get('/assets/ingredients.txt', { responseType: 'text' })
+            .pipe(map<string, IIngredient[]>(text => {
+                debugger
+                const lines = text.split('\n').slice(1)
+                const ingredientsLines = lines.map(_ => _.split('|'))
+                return ingredientsLines.map(line => {
+                    const derivedFromId = line[2]
+                    const derivedFromName = line[3]
+                    const derivedFrom = derivedFromId ? { id: derivedFromId, name: derivedFromName } as IIngredient : null
+                    return { id: line[0], name: line[1], derived_from: derivedFrom } as IIngredient
+                }, []) as IIngredient[]
+            }))
     }
 
     getIngredients(skip: number, limit: number, search: string = null): Observable<{ingredient: IIngredient, derived_ingredients: IIngredient[]}[]> {

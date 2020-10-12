@@ -1,58 +1,58 @@
-<ion-app *ngIf="user">
-  <ion-menu class="menu" side="start" menuId="first" contentId="main">
-    <div class="header">
-      <app-profile-picture></app-profile-picture>
-      <p class="profile-name">{{user.name}}</p>
-    </div>
-    <ion-content>
-      <ul class="menu-list">
-        <li class="menu-item" [class.selected]="route == '/reader'" [routerLink]="['/reader']">
-          <ion-router-link>
-            <ion-icon name="barcode-outline"></ion-icon>
-            <div class="item-description">Ler rótulo</div>
-          </ion-router-link>
-        </li> 
-        <li class="menu-item" [class.selected]="route == '/labels'" [routerLink]="['/labels']">
-          <ion-router-link>
-            <ion-icon name="cube-outline"></ion-icon>
-            <div class="item-description">Produtos</div>
-          </ion-router-link>
-        </li>
-        <li class="menu-item" [routerLink]="['/settings']">
-          <ion-router-link>
-            <ion-icon name="settings-outline"></ion-icon>
-            <div class="item-description">Minhas preferências</div>
-          </ion-router-link>
-        </li>
-        <li class="menu-item" (click)="logout()">
-          <ion-router-link>
-            <ion-icon name="log-out-outline"></ion-icon>
-            <div class="item-description">Sair</div>
-          </ion-router-link>
-        </li>
-      </ul>
-    </ion-content>
-  </ion-menu>
-
-  <ion-header translucent>
-    <ion-toolbar>
-      <ion-buttons slot="start">
-        <ion-menu-button color="dark"></ion-menu-button>
-      </ion-buttons>
-      <ion-title>
-        <ion-text color="dark">
-          <ion-icon [name]="route_icons[route] || 'barcode-outline'"></ion-icon>
-        </ion-text>
-      </ion-title>
-    </ion-toolbar>
-  </ion-header>
-
+<ion-menu class="menu" side="start" menuId="first" contentId="main">
+  <div class="header">
+    <app-profile-picture></app-profile-picture>
+    <p class="profile-name">{{user.name}}</p>
+  </div>
   <ion-content>
-    <!-- <ion-header collapse="condense">
-      <ion-toolbar>
-        <ion-title size="large">ok</ion-title>
-      </ion-toolbar>
-    </ion-header> -->
-    <ion-router-outlet id="main"></ion-router-outlet>
+    <ul class="menu-list">
+      <li class="menu-item" [class.selected]="route == '/reader' || route == ''" [routerLink]="['/reader']">
+        <ion-router-link>
+          <ion-icon name="barcode-outline"></ion-icon>
+          <div class="item-description">Ler rótulo</div>
+        </ion-router-link>
+      </li>
+      <li class="menu-item" [class.selected]="route == '/labels'" [routerLink]="['/labels']">
+        <ion-router-link>
+          <ion-icon name="cube-outline"></ion-icon>
+          <div class="item-description">Rótulos</div>
+        </ion-router-link>
+      </li>
+      <li class="menu-item" [class.selected]="route == '/preferences'" [routerLink]="['/preferences']">
+        <ion-router-link>
+          <ion-icon name="grid-outline"></ion-icon>
+          <div class="item-description">Preferências</div>
+        </ion-router-link>
+      </li>
+      <li class="menu-item" [class.selected]="route == '/settings'" [routerLink]="['/settings']">
+        <ion-router-link>
+          <ion-icon name="person-outline"></ion-icon>
+          <div class="item-description">Conta</div>
+        </ion-router-link>
+      </li>
+      <li class="menu-item" (click)="logout()">
+        <ion-router-link>
+          <ion-icon name="log-out-outline"></ion-icon>
+          <div class="item-description">Sair</div>
+        </ion-router-link>
+      </li>
+    </ul>
   </ion-content>
-</ion-app>
+</ion-menu>
+
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button color="dark"></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      <ion-text color="dark">
+        <ion-icon [name]="route_icons[route] || 'barcode-outline'"></ion-icon>
+      </ion-text>
+    </ion-title>
+    <ion-progress-bar type="indeterminate" *ngIf="loading"></ion-progress-bar>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-router-outlet id="main"></ion-router-outlet>
+</ion-content>

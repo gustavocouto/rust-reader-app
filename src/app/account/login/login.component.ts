@@ -21,7 +21,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {}
 
-  login(form: NgForm) {
+  login(form?: NgForm) {
     if(!form) return
     if(!form.valid) return form.control.markAllAsTouched()
 

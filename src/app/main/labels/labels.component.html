@@ -1,28 +1,33 @@
-<ion-searchbar color="light" placeholder="Buscar"
-  (ionChange)="filter($event.target.value)" debounce="250"></ion-searchbar>
+<ion-searchbar color="light" placeholder="Buscar" (ionChange)="filter($event.target.value)" debounce="250">
+</ion-searchbar>
 <ion-list lines="none">
-  <ion-item *ngFor="let label of labels"
-    (click)="viewLabel(label.id)"
-    color="dark-contrast">
-    <ion-label>
-      <h2>{{label.name}}</h2>
-      <p>
-        <ion-text color="medium">
-          Por <span class="label-user-name">{{label.user.name}}</span>,
-          em <span class="label-date">{{label.created | date: 'dd LLLL'}}</span>
-        </ion-text>
-      </p>
-      <p>
-        <ion-text color="medium">
-          <strong>{{label.ingredients?.length}}</strong>
-          compostos identificados<ion-text color="medium">, </ion-text>
-        </ion-text>
-        <ion-text color="danger">
-          <strong>{{countRelevantIngredients(label)}}</strong> relevantes
-        </ion-text>
-      </p>
-    </ion-label>
-  </ion-item>
+  <div class="no-results" *ngIf="searched && !labels.length; else results">
+    <ion-text color="medium">
+      Nenhum resultado encontrado
+    </ion-text>
+  </div>
+  <ng-template #results>
+    <ion-item *ngFor="let label of labels" (click)="viewLabel(label.id)" color="dark-contrast">
+      <ion-label>
+        <h2>{{label.name}}</h2>
+        <p>
+          <ion-text color="medium">
+            Por <span class="label-user-name">{{label.user.name}}</span>,
+            em <span class="label-date">{{label.created | date: 'dd LLLL'}}</span>
+          </ion-text>
+        </p>
+        <p>
+          <ion-text color="medium">
+            <strong>{{label.ingredients?.length}}</strong>
+            compostos identificados<ion-text color="medium">, </ion-text>
+          </ion-text>
+          <ion-text color="danger">
+            <strong>{{countRelevantIngredients(label)}}</strong> relevantes
+          </ion-text>
+        </p>
+      </ion-label>
+    </ion-item>
+  </ng-template>
 </ion-list>
 
 <ion-tabs>

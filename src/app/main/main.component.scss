@@ -55,3 +55,8 @@ ion-title {
     margin-top: 12px;
   }
 }
+
+ion-content {
+  height: 60vh;
+  overflow-y: scroll;
+}

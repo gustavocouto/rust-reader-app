@@ -11,18 +11,6 @@ ion-list {
         font-weight: bold;
         font-style: italic;
     }
-    
-    // ion-avatar {
-    //     text-align: center;
-    //     display: table;
-    //     border: 2px solid var(--ion-color-light);
-        
-    //     ion-icon {
-    //         padding: 8px;
-    //         vertical-align: middle;
-    //         display: table-cell;
-    //     }
-    // }
 
     .bookmark {
         margin-right: 5px;
@@ -32,4 +20,9 @@ ion-list {
 ion-tabs {
     top: auto;
     height: $tabs-height;
+}
+
+.no-results {
+    margin: 10px;
+    text-align: center;
 }

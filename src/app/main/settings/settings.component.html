@@ -1,43 +1,45 @@
-<ion-tabs>
-  <ion-tab tab="account">
-    <ion-content fullscreen>
-      <ion-searchbar color="light" placeholder="Buscar" (ionChange)="filter($event.target.value)" debounce="250">
-      </ion-searchbar>
-      <ion-list class="read-list" lines="full" *ngFor="let ingredient of ingredients">
-        <ion-item>
-          <div class="allergenic-selection" [class.selected]="isPriorityAllergenic(ingredient.ingredient.name)">
-            <ion-label>
-              <h2 (click)="toggleAllergenic(ingredient.ingredient)">
-                <ion-text class="allergenic-title">{{ingredient.ingredient.name}}</ion-text>
-              </h2>
-              <small (click)="ingredient.showDerivedNames = !!!ingredient.showDerivedNames">
-                <ion-text color="dark">
-                  Ver derivações <ion-icon name="chevron-down-outline"></ion-icon>
-                </ion-text>
-                <ul class="derived-names-list" *ngIf="ingredient.showDerivedNames">
-                  <li *ngFor="let derived_ingredient of ingredient.derived_ingredients">{{derived_ingredient.name}}</li>
-                </ul>
-              </small>
-            </ion-label>
-          </div>
-        </ion-item>
-      </ion-list>
-      <ion-infinite-scroll threshold="100px" (ionInfinite)="incrementPage($event)">
-        <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Carregando itens...">
-        </ion-infinite-scroll-content>
-      </ion-infinite-scroll>
-    </ion-content>
-  </ion-tab>
-
-  <ion-tab-bar slot="bottom">
-    <ion-tab-button tab="account">
-      <ion-icon name="person-outline"></ion-icon>
-      <ion-label>Conta</ion-label>
-    </ion-tab-button>
-
-    <ion-tab-button tab="allergenics">
-      <ion-icon name="pricetag-outline"></ion-icon>
-      <ion-label>Alergênicos</ion-label>
-    </ion-tab-button>
-  </ion-tab-bar>
-</ion-tabs>
+<ion-content fullscreen>
+  <ion-card>
+    <ion-card-content>
+      <ion-card-title color="primary">Alteração de informações da conta</ion-card-title>
+      <ion-item>
+        <ion-label position="floating">Email</ion-label>
+        <ion-input type="email" name="email" value="{{email}}" (input)="email = $event.target.value"></ion-input>
+      </ion-item>
+      <small class="error" *ngIf="errors['email']">Preencha seu email</small>
+      <ion-item>
+        <ion-label position="floating">Nome</ion-label>
+        <ion-input type="email" name="email" value="{{name}}" (input)="name = $event.target.value"></ion-input>
+      </ion-item>
+      <small class="error" *ngIf="errors['name']">Preencha seu nome</small>
+      <ion-button color="primary" expand="block" (click)="changeEmail()">
+        Alterar Informações
+      </ion-button>
+    </ion-card-content>
+  </ion-card>
+  <ion-card>
+    <ion-card-content>
+      <ion-card-title color="primary">Alteração de senha</ion-card-title>
+      <ion-item>
+        <ion-label position="floating">Senha atual</ion-label>
+        <ion-input type="email" name="email" (input)="password = $event.target.value"></ion-input>
+      </ion-item>
+      <small class="error" *ngIf="errors['password']">Preencha sua senha atual</small>
+      <ion-item>
+        <ion-label position="floating">Nova senha</ion-label>
+        <ion-input type="email" name="email" (input)="newPassword = $event.target.value"></ion-input>
+      </ion-item>
+      <small class="error" *ngIf="errors['newPasswordEmpty']">Preencha a nova senha</small>
+      <small class="error" *ngIf="errors['newPasswordEqual']">A nova senha não deve ser igual a anterior</small>
+      <ion-item>
+        <ion-label position="floating">Repetir nova senha</ion-label>
+        <ion-input type="email" name="email" (input)="repeatNewPassword = $event.target.value"></ion-input>
+      </ion-item>
+      <small class="error" *ngIf="errors['repeatNewPasswordEmpty']">Preencha novamente a nova senha</small>
+      <small class="error" *ngIf="errors['repeatNewPasswordNotEqual']">As senhas não coincidem</small>
+      <ion-button color="primary" expand="block" (click)="changePassword()">
+        Alterar Senha
+      </ion-button>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

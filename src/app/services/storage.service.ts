@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage';
+import { IIngredient } from '../interfaces/IIngredient';
 import { IUser } from '../interfaces/IUser';
 
 @Injectable({
@@ -17,6 +18,10 @@ export class StorageService {
     async getUser(): Promise<IUser> { return await this._storage.get('usr') }
 
     async setUser(user: IUser) { await this._storage.set('usr', user) }
+
+    async getIngredients() { return await this._storage.get('ing') }
+
+    async setIngredients(ingredients: IIngredient[]) { return await this._storage.set('ing', ingredients) }
 
     async clear() { await this._storage.clear() }
 }

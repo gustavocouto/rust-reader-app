@@ -16,6 +16,7 @@ export class LabelComponent implements OnInit {
   @Input() strict: string
 
   label: ILabel
+  loading: boolean
 
   constructor(
     private _route: ActivatedRoute,
@@ -23,7 +24,7 @@ export class LabelComponent implements OnInit {
     private _contextService: ContextService,
     private _modalController: ModalController
   ) {
-
+    _contextService.onLoadingChange.subscribe(loading => this.loading = loading)
   }
 
   async ngOnInit() {
@@ -36,5 +37,6 @@ export class LabelComponent implements OnInit {
 
   async delete(id: string) {
     await this._apiService.deleteLabel(id).toPromise()
+    await this._modalController.dismiss({ deleted: true })
   }
 }

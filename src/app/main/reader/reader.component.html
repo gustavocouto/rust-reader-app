@@ -1,11 +1,17 @@
 <div id="app-reader">
-    <div id="camera-preview" #cameraPreview (click)="capture()">
+    <div id="camera-preview" #cameraPreview >
         <div id="camera-text-content"
             [ngStyle]="scanned_file_base64 ? {'background-image': 'url(' + scanned_file_base64 + ')'} : {'background-color': '#000'}">
             <img *ngIf="scanned_file" [src]="scanned_file_base64" />
-            <div class="no-capture" *ngIf="!scanned_file" color="medium">
-                <ion-icon name="scan-outline"></ion-icon>
-                <span>ESCANEAR RÓTULO</span>
+            <div class="no-capture" *ngIf="!scanned_file"
+                (click)="capture(1)" color="medium">
+                <ion-icon name="camera-outline"></ion-icon>
+                <span>CÂMERA</span>
+            </div>
+            <div class="no-capture" *ngIf="!scanned_file"
+                (click)="capture(0)" color="medium">
+                <ion-icon name="image-outline"></ion-icon>
+                <span>GALERIA</span>
             </div>
         </div>
     </div>
@@ -32,12 +38,8 @@
             <p><ion-icon name="search-outline"></ion-icon></p>
             <p><span>Analisando resultados...</span></p>
         </ion-text>
-        <ion-text *ngIf="scanned_file && !ingredient_reads.length && !scanning" color="light" class="scan-result-title">
-            <p><ion-icon name="sad-outline"></ion-icon></p>
-            <p><span>A análise não gerou resultados. Tente realizar o scan novamente.</span></p>
-        </ion-text>
         <app-ingredient-list
-            *ngIf="scanned_file && ingredient_reads.length"
+            *ngIf="scanned_file && !scanning"
             [ingredient_reads]="ingredient_reads">
         </app-ingredient-list>
     </div>

@@ -1,4 +1,4 @@
-import { APP_INITIALIZER, NgModule } from '@angular/core';
+import { APP_INITIALIZER, Injector, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
@@ -9,7 +9,10 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AppHttpInterceptor } from './app-http.interceptor';
-import { StartupService } from './services/startup.service';
+import { loadUser, loadIngredients } from './services/app-startup.service';
+import { ProfilePictureComponent } from './components/profile-picture/profile-picture.component';
+import { ContextService } from './services/context.service';
+import { BackgroundMode } from '@ionic-native/background-mode/ngx';
 
 @NgModule({
   entryComponents: [],
@@ -23,10 +26,11 @@ import { StartupService } from './services/startup.service';
   providers: [
     StatusBar,
     SplashScreen,
-    StartupService,
+    BackgroundMode,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     { provide: HTTP_INTERCEPTORS, useClass: AppHttpInterceptor, multi: true },
-    { provide: APP_INITIALIZER, useFactory: (ss: StartupService) => () => ss.load(), deps: [StartupService], multi: true }
+    { provide: APP_INITIALIZER, useFactory: loadUser, deps: [Injector, ContextService], multi: true },
+    { provide: APP_INITIALIZER, useFactory: loadIngredients, deps: [Injector, ContextService], multi: true }
   ],
   bootstrap: [
     AppComponent

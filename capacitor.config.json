@@ -12,7 +12,7 @@
   "cordova": {},
   "linuxAndroidStudioPath": "/home/gustavocouto/android-studio/bin/studio.sh",
   "server": {
-    "url": "http://192.168.2.117:8100",
+    "url": "http://192.168.2.118:8100",
     "cleartext": true
   }
 }

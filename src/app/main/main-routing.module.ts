@@ -5,6 +5,7 @@ import { ReaderComponent } from './reader/reader.component';
 import { LabelsComponent } from './labels/labels.component';
 import { LabelComponent } from './label/label.component';
 import { SettingsComponent } from './settings/settings.component';
+import { PreferencesComponent } from './preferences/preferences.component';
 
 const routes: Routes = [
   {
@@ -27,6 +28,10 @@ const routes: Routes = [
   {
     path: 'settings',
     component: SettingsComponent
+  },
+  {
+    path: 'preferences',
+    component: PreferencesComponent
   },
   {
     path: '*',

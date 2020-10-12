@@ -1,4 +1,4 @@
-import { LOCALE_ID, NgModule } from '@angular/core';
+import { APP_INITIALIZER, CUSTOM_ELEMENTS_SCHEMA, LOCALE_ID, NgModule } from '@angular/core';
 import { RouteReuseStrategy } from '@angular/router';
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
@@ -14,6 +14,8 @@ import { IngredientListComponent } from '../components/ingredient-list/ingredien
 import localePt from '@angular/common/locales/pt-PT'
 import { LabelComponent } from './label/label.component';
 import { SettingsComponent } from './settings/settings.component';
+import { PreferencesComponent } from './preferences/preferences.component';
+import { BackgroundMode } from '@ionic-native/background-mode/ngx';
 
 registerLocaleData(localePt);
 
@@ -37,9 +39,11 @@ registerLocaleData(localePt);
     LabelComponent,
     LabelsComponent,
     SettingsComponent,
+    PreferencesComponent,
     ProfilePictureComponent,
     IngredientListComponent
   ],
-  bootstrap: [MainComponent]
+  bootstrap: [MainComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class MainModule {}

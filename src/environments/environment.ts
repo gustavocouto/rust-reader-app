@@ -5,11 +5,12 @@
 export const environment = {
   production: false,
   readThreshold: {
-    match: [0.85, 1],
-    undef: [0.75, 0.85],
-    unmatch: [0, 0.75]
+    match: [-1000, 0],
+    undef: [-30000, -1000],
+    unmatch: [-Infinity, -30000]
   },
-  apiUrl: 'http://127.0.0.1:5000/api'
+  // apiUrl: 'https://f240d939fb89.ngrok.io/api'
+  apiUrl: 'https://rustreader.herokuapp.com/api'
 };
 
 /*

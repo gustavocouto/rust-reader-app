@@ -17,7 +17,7 @@ export class IngredientListComponent implements OnInit {
 
   getSortedIngredients() {
     return this.ingredient_reads
-      .filter(ingredient => ingredient.accuracy)
+      .filter(ingredient => ingredient.accuracy != environment.readThreshold.unmatch[0])
       .sort((left, right) => {
         return left.accuracy > right.accuracy ? -1 : 1
       })

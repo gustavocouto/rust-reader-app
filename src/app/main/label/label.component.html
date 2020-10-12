@@ -4,6 +4,7 @@
     <ion-buttons slot="end">
       <ion-button (click)="dismissModal()">Voltar</ion-button>
     </ion-buttons>
+    <ion-progress-bar type="indeterminate" *ngIf="loading"></ion-progress-bar>
   </ion-toolbar>
 </ion-header>
 <ion-content fullscreen>

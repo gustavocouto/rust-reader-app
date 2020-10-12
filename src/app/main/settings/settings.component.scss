@@ -1,52 +1,15 @@
-ion-tab {
-    height: 100%;
+ion-button {
+    margin-top: 20px;
 }
 
-.allergenic-selection {
-    width: 100%;
-    padding-left: 10px;
-    margin-bottom: 8px;
-    border-left: 4px solid var(--ion-color-dark);
-
-    .allergenic-title {
-        font-weight: bold;
-        color: var(--ion-color-dark);
-    }
-
-    &.selected {
-        border-left-color: var(--ion-color-danger);
-
-        .allergenic-title {
-            color: var(--ion-color-danger);
-        }
-    }
-
-    ion-icon {
-        position: absolute;
-        margin-top: 3px;
-        margin-left: 5px;
-    }
-}
-
-.derived-names-list {
-    margin: 0;
-    padding-left: 15px;
-    list-style: none;
-
-    & li {
-        color: var(--ion-color-medium);
-    }
-
-    & li::before {
-        content: "\2022";
-        color: var(--ion-color-medium);
-        font-weight: bold;
-        display: inline-block;
-        width: 1em;
-        margin-left: -1em;
-    }
-}
-
-ion-infinite-scroll {
+ion-card-title {
     padding-top: 15px;
+    padding-bottom: 15px;
+    text-align: center;
+}
+
+.error {
+    display: block;
+    padding-top: 5px;
+    color: var(--ion-color-danger);
 }
