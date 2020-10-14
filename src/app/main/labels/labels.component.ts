@@ -54,7 +54,7 @@ export class LabelsComponent implements OnInit {
 
     await modal.present()
     const { data } = await modal.onWillDismiss()
-    if(data.deleted)
+    if(data && data.deleted)
       this.filter(this.lastSearch)
   }
 }

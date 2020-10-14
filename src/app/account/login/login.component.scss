@@ -26,3 +26,25 @@ ion-router-link {
     padding: 8px;
     display: block;
 }
+
+.error {
+    display: block;
+    padding-top: 5px;
+    color: var(--ion-color-danger);
+}
+
+.not-found {
+    text-align: center;
+    display: block;
+    margin-top: 15px;
+}
+
+.config-env {
+    text-align: center;
+    color: var(--ion-color-primary);
+    
+    h3 {
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+}

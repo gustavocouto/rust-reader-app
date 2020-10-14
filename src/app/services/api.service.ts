@@ -21,6 +21,10 @@ export class ApiService {
         return this._http.post<{token: string, user: IUser}>(`/auth`, { email, password })
     }
 
+    changePassowrd(oldPassword: string, newPassword: string): Observable<any> {
+        return this._http.put('', { old_password: oldPassword, new_password: newPassword })
+    }
+
     register(name: string, email: string, password: string): Observable<any> {
         return this._http.post('/users', { name, email, password })
     }

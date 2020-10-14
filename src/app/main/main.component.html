@@ -1,11 +1,11 @@
 <ion-menu class="menu" side="start" menuId="first" contentId="main">
   <div class="header">
-    <app-profile-picture></app-profile-picture>
-    <p class="profile-name">{{user.name}}</p>
+    <app-profile-picture [monsterName]="context.user.monster_name"></app-profile-picture>
+    <p class="profile-name">{{context.user.name}}</p>
   </div>
   <ion-content>
     <ul class="menu-list">
-      <li class="menu-item" [class.selected]="route == '/reader' || route == ''" [routerLink]="['/reader']">
+      <li class="menu-item" [class.selected]="route == '/reader' || route == '' || route == '/'" [routerLink]="['/reader']">
         <ion-router-link>
           <ion-icon name="barcode-outline"></ion-icon>
           <div class="item-description">Ler rótulo</div>

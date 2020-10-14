@@ -15,6 +15,7 @@
     <ion-text color="medium">
       <p>Por <strong>{{label.user.name}}</strong></p>
     </ion-text>
+    <app-profile-picture [monsterName]="label.user.monster_name"></app-profile-picture>
     <ion-text color="medium">
       <p>Em <strong>{{label.created | date: 'longDate'}}</strong></p>
     </ion-text>

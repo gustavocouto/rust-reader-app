@@ -11,7 +11,6 @@ import { BackgroundMode } from '@ionic-native/background-mode/ngx';
   styleUrls: ['main.component.scss']
 })
 export class MainComponent implements OnInit {
-  user: IUser
   route: string
   loading: boolean
   route_icons = {
@@ -24,9 +23,8 @@ export class MainComponent implements OnInit {
   constructor(
     private _router: Router,
     private _menu: MenuController,
-    private _contextService: ContextService) {
-    this.user = this._contextService.user
-    _contextService.onLoadingChange.subscribe(loading => this.loading = loading)
+    public context: ContextService) {
+    context.onLoadingChange.subscribe(loading => this.loading = loading)
     _router.events.subscribe(e => {
       if (e instanceof NavigationEnd) {
         this.route = e.url
@@ -40,7 +38,7 @@ export class MainComponent implements OnInit {
   }
 
   logout() {
-    this._contextService.storage.clear()
+    this.context.storage.clear()
     this._router.navigateByUrl('/account/login')
   }
 }

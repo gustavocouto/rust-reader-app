@@ -29,8 +29,7 @@ import { BackgroundMode } from '@ionic-native/background-mode/ngx';
     BackgroundMode,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     { provide: HTTP_INTERCEPTORS, useClass: AppHttpInterceptor, multi: true },
-    { provide: APP_INITIALIZER, useFactory: loadUser, deps: [Injector, ContextService], multi: true },
-    { provide: APP_INITIALIZER, useFactory: loadIngredients, deps: [Injector, ContextService], multi: true }
+    { provide: APP_INITIALIZER, useFactory: loadUser, deps: [Injector, ContextService], multi: true }
   ],
   bootstrap: [
     AppComponent

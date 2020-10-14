@@ -26,3 +26,9 @@ ion-router-link {
     padding: 8px;
     display: block;
 }
+
+.error {
+    display: block;
+    padding-top: 5px;
+    color: var(--ion-color-danger);
+}

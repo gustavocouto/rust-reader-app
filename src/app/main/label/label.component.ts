@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { AfterViewChecked, AfterViewInit, Component, Input, OnInit } from '@angular/core';
 import { ILabel } from 'src/app/interfaces/ILabel';
 import { ContextService } from 'src/app/services/context.service';
 import { ApiService } from 'src/app/services/api.service';
@@ -11,7 +11,7 @@ import { ModalController } from '@ionic/angular';
   templateUrl: './label.component.html',
   styleUrls: ['./label.component.scss'],
 })
-export class LabelComponent implements OnInit {
+export class LabelComponent implements AfterViewInit {
   @Input() id: string
   @Input() strict: string
 
@@ -24,11 +24,11 @@ export class LabelComponent implements OnInit {
     private _contextService: ContextService,
     private _modalController: ModalController
   ) {
-    _contextService.onLoadingChange.subscribe(loading => this.loading = loading)
+    this._contextService.onLoadingChange.subscribe(loading => this.loading = loading)
   }
 
-  async ngOnInit() {
-    this.label = await this._apiService.getLabel(this.id).toPromise()
+  async ngAfterViewInit() {
+    setTimeout(async () => this.label = await this._apiService.getLabel(this.id).toPromise())
   }
 
   async dismissModal() {

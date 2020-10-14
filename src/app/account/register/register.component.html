@@ -9,42 +9,49 @@
             </ion-text>
         </div>
         <ion-card>
-            <form #form="ngForm" (ngSubmit)="register(form)">
-                <ion-card-content>
-                    <app-profile-picture></app-profile-picture>
-                    <ion-item>
-                        <ion-label position="floating">Nome</ion-label>
-                        <ion-input type="text" name="name" required minlength="3" maxlength="100"
-                            ngModel #name="ngModel" placeholder="Como podemos lhe chamar?"></ion-input>
-                    </ion-item>
-
-                    <ion-item>
-                        <ion-label position="floating">Email</ion-label>
-                        <ion-input type="email" name="email" required minlength="3" maxlength="100" email="true"
-                            ngModel #email="ngModel" placeholder="Este será seu login"></ion-input>
-                    </ion-item>
-
-                    <ion-item>
-                        <ion-label position="floating">Senha</ion-label>
-                        <ion-input type="password" name="password" required minlength="3" maxlength="100"
-                            ngModel #password="ngModel" placeholder="Esta será sua senha"></ion-input>
-                    </ion-item>
-
-                    <ion-item>
-                        <ion-label position="floating">
-                            Repetir senha
-                            <ion-text *ngIf="confirmPassword.touched && confirmPassword.value != password.value"> - As senhas não coincidem</ion-text>
-                        </ion-label>
-                        <ion-input type="password" name="confirmPassword" required minlength="3" maxlength="100"
-                            ngModel #confirmPassword="ngModel" placeholder="Repita sua senha"></ion-input>
-                    </ion-item>
-                </ion-card-content>
-                <ion-card-content>
-                    <ion-button color="primary" expand="block" type="submit">
-                        Registrar
-                    </ion-button>
-                </ion-card-content>
-            </form>
+            <ion-card-content>
+                <app-profile-picture></app-profile-picture>
+                <ion-item>
+                    <ion-label position="floating">Nome</ion-label>
+                    <ion-input type="text" name="name" #name
+                        placeholder="Como podemos lhe chamar?"></ion-input>
+                </ion-item>
+                <small class="error" *ngIf="validator?.validated && validator.validations.name.range.invalid">
+                    {{validator.validations.name.range.message}}
+                </small>
+                <ion-item>
+                    <ion-label position="floating">Email</ion-label>
+                    <ion-input type="email" email="true" #email
+                        placeholder="Este será seu login"></ion-input>
+                </ion-item>
+                <small class="error" *ngIf="validator?.validated && validator?.validations.email.email.invalid">
+                    {{validator.validations.email.email.message}}
+                </small>
+                <ion-item>
+                    <ion-label position="floating">Senha</ion-label>
+                    <ion-input type="password" #password
+                        placeholder="Esta será sua senha"></ion-input>
+                </ion-item>
+                <small class="error" *ngIf="validator?.validated && validator.validations.password.minLength.invalid">
+                    {{validator.validations.password.minLength.message}}
+                </small>
+                <ion-item>
+                    <ion-label position="floating">
+                        Repetir senha
+                    </ion-label>
+                    <ion-input type="password" #repeatPassword
+                        placeholder="Repita sua senha"></ion-input>
+                </ion-item>
+                <small class="error" *ngIf="validator?.validated && validator.validations.repeatPassword.equals.invalid">
+                    {{validator.validations.repeatPassword.equals.message}}
+                </small>
+            </ion-card-content>
+            <ion-card-content>
+                <ion-button color="primary" expand="block" type="button" (click)="register()" [disabled]="loading">
+                    <ion-text *ngIf="!loading">Registrar</ion-text>
+                    <ion-text *ngIf="loading">Registrando</ion-text>
+                </ion-button>
+            </ion-card-content>
         </ion-card>
         <div class="footer">
             <ion-router-link [routerLink]="['/account/login']">Realize o login</ion-router-link>

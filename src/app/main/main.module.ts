@@ -1,4 +1,4 @@
-import { APP_INITIALIZER, CUSTOM_ELEMENTS_SCHEMA, LOCALE_ID, NgModule } from '@angular/core';
+import { APP_INITIALIZER, CUSTOM_ELEMENTS_SCHEMA, Injector, LOCALE_ID, NgModule } from '@angular/core';
 import { RouteReuseStrategy } from '@angular/router';
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
@@ -16,6 +16,9 @@ import { LabelComponent } from './label/label.component';
 import { SettingsComponent } from './settings/settings.component';
 import { PreferencesComponent } from './preferences/preferences.component';
 import { BackgroundMode } from '@ionic-native/background-mode/ngx';
+import { MonsterListComponent } from '../components/monster-list/monster-list.component';
+import { loadIngredients } from '../services/app-startup.service';
+import { ContextService } from '../services/context.service';
 
 registerLocaleData(localePt);
 
@@ -41,7 +44,8 @@ registerLocaleData(localePt);
     SettingsComponent,
     PreferencesComponent,
     ProfilePictureComponent,
-    IngredientListComponent
+    IngredientListComponent,
+    MonsterListComponent
   ],
   bootstrap: [MainComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]

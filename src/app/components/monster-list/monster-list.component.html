@@ -1,0 +1,19 @@
+<ion-header translucent>
+    <ion-toolbar>
+      <ion-buttons slot="end">
+        <ion-button (click)="dismissModal()">Voltar</ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content fullscreen>
+    <ion-item *ngFor="let monsterName of monsterNames"
+        [color]="monsterName == monster ? 'primary' : ''"
+        (click)="dismissModal(monsterName)">
+        <ion-avatar>
+            <img src="../assets/monsters/{{monsterName}}.png" />
+        </ion-avatar>
+        <ion-label>
+            <ion-text class="monster-name">{{monsterName}}</ion-text>
+        </ion-label>
+    </ion-item>
+  </ion-content>

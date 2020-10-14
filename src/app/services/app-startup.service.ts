@@ -23,6 +23,10 @@ export function loadUser(injector: Injector, contextService: ContextService) {
 
 export function loadIngredients(injector: Injector, contextService: ContextService) {
     return async () => {
+        const user = await contextService.storage.getUser()
+        if(!user)
+            return true
+
         const apiService = injector.get(ApiService)
         contextService.ingredients = await contextService.storage.getIngredients()
 

@@ -12,7 +12,8 @@
         <h2>{{label.name}}</h2>
         <p>
           <ion-text color="medium">
-            Por <span class="label-user-name">{{label.user.name}}</span>,
+            Por <span class="label-user-name">{{label.user.name}}</span>
+            <img class="user-img" src="./assets/monsters/{{label.user.monster_name}}.png"/>
             em <span class="label-date">{{label.created | date: 'dd LLLL'}}</span>
           </ion-text>
         </p>

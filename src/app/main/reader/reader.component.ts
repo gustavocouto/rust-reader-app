@@ -61,12 +61,10 @@ export class ReaderComponent {
     await this._apiService.addLabel({name: this.label_name, ingredients: this.ingredient_reads}).toPromise()
     this.clearScan()
 
-    const toast = await this._toastController.create({
+    await this._toastController.create({
       message: 'Informações do rótulo salvas.',
       duration: 4000
-    })
-
-    toast.present()
+    }).then(_ => _.present())
   }
 
   async setScan(file: File) {
