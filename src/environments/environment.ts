@@ -9,8 +9,8 @@ export const environment = {
     undef: [-30000, -1000],
     unmatch: [-Infinity, -30000]
   },
-  // apiUrl: 'https://2c7a49032683.ngrok.io/api'
-  apiUrl: 'https://rustreader.herokuapp.com/api'
+  apiUrl: 'https://839698a059b1.ngrok.io/api'
+  // apiUrl: 'https://rustreader.herokuapp.com/api'
 };
 
 /*

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HttpResponse } from '@angular/common/http';
-import { map, switchMap } from 'rxjs/operators';
-import { Observable, from } from 'rxjs';
+import { catchError, map, switchMap } from 'rxjs/operators';
+import { Observable, from, throwError } from 'rxjs';
 import { ContextService } from './services/context.service';
 import { environment } from 'src/environments/environment';
 
@@ -27,12 +27,18 @@ export class AppHttpInterceptor implements HttpInterceptor {
 
                 return next
                     .handle(request)
-                    .pipe(map((e: HttpEvent<any>) => {
-                        if (e instanceof HttpResponse)
-                            this._contextService.setLoading(false);
+                    .pipe(
+                        map((e: HttpEvent<any>) => {
+                            if (e instanceof HttpResponse)
+                                this._contextService.setLoading(false)
 
-                        return e
-                    }))
+                            return e
+                        }),
+                        catchError((err) => {
+                            this._contextService.setLoading(false)
+                            return throwError(err)
+                        })
+                    )
             }))
     }
 }

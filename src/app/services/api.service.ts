@@ -22,7 +22,7 @@ export class ApiService {
     }
 
     changePassowrd(oldPassword: string, newPassword: string): Observable<any> {
-        return this._http.put('', { old_password: oldPassword, new_password: newPassword })
+        return this._http.put('/auth', { old_password: oldPassword, new_password: newPassword })
     }
 
     register(name: string, email: string, password: string): Observable<any> {

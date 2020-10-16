@@ -3,7 +3,7 @@ import { Camera, CameraOptions, DestinationType, EncodingType, MediaType } from 
 import { IIngredientRead } from 'src/app/interfaces/IIngredientRead';
 import { ApiService } from 'src/app/services/api.service';
 import { IngredientService } from 'src/app/services/ingredient.service';
-import { ToastController } from '@ionic/angular';
+import { AlertController, ToastController } from '@ionic/angular';
 import { BackgroundMode } from '@ionic-native/background-mode/ngx';
 
 @Component({
@@ -23,10 +23,11 @@ export class ReaderComponent {
     private _apiService: ApiService,
     private _ingredientService: IngredientService,
     private _toastController: ToastController,
-    private _backgroundMode: BackgroundMode) {
-    // _apiService
-    //   .readImageFile(`${window.location.origin}/assets/images/rotulo.jpg`, 'image.jpg', 'image/jpeg')
-    //   .subscribe(file => this.setScan(file))
+    private _backgroundMode: BackgroundMode,
+    private _alertController: AlertController) {
+    _apiService
+      .readImageFile(`${window.location.origin}/assets/images/rotulo.jpg`, 'image.jpg', 'image/jpeg')
+      .subscribe(file => this.setScan(file))
   }
 
   async capture(sourceType: number) {
@@ -55,10 +56,13 @@ export class ReaderComponent {
   }
 
   async save() {
-    if(!this.scanned_file || !this.ingredient_reads.length)
-      return
+    if (!this.label_name)
+      return await this._toastController.create({
+        message: 'Descreva o nome do rótulo',
+        duration: 4000
+      }).then(_ => _.present())
 
-    await this._apiService.addLabel({name: this.label_name, ingredients: this.ingredient_reads}).toPromise()
+    await this._apiService.addLabel({ name: this.label_name, ingredients: this.ingredient_reads }).toPromise()
     this.clearScan()
 
     await this._toastController.create({
@@ -75,16 +79,29 @@ export class ReaderComponent {
     reader.onload = () => this.scanned_file_base64 = (reader.result as string)
 
     const text = await this._apiService.readImageAsText(file).toPromise()
-    if(this.scanned_file)
+    if (this.scanned_file)
       this.ingredient_reads = await this._ingredientService.findIngredientsMatches(text)
-    
+
     this.scanning = false
   }
 
-  clearScan() {
-    this.scanning = false
-    this.scanned_file = null
-    this.scanned_file_base64 = null
-    this.ingredient_reads = []
+  async clearScan() {
+    await this._alertController.create({
+      header: 'Deseja cancelar a leitura?',
+      buttons: [
+        {
+          text: 'Sim',
+          handler: () => {
+            this.scanning = false
+            this.scanned_file = null
+            this.scanned_file_base64 = null
+            this.ingredient_reads = []
+          }
+        },
+        {
+          text: 'Não'
+        }
+      ]
+    }).then(_ => _.present())
   }
 }

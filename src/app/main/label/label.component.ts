@@ -4,7 +4,7 @@ import { ContextService } from 'src/app/services/context.service';
 import { ApiService } from 'src/app/services/api.service';
 import { environment } from 'src/environments/environment';
 import { ActivatedRoute } from '@angular/router';
-import { ModalController } from '@ionic/angular';
+import { AlertController, ModalController } from '@ionic/angular';
 
 @Component({
   selector: 'app-label',
@@ -22,7 +22,8 @@ export class LabelComponent implements AfterViewInit {
     private _route: ActivatedRoute,
     private _apiService: ApiService,
     private _contextService: ContextService,
-    private _modalController: ModalController
+    private _modalController: ModalController,
+    private _alertController: AlertController
   ) {
     this._contextService.onLoadingChange.subscribe(loading => this.loading = loading)
   }
@@ -36,7 +37,21 @@ export class LabelComponent implements AfterViewInit {
   }
 
   async delete(id: string) {
-    await this._apiService.deleteLabel(id).toPromise()
-    await this._modalController.dismiss({ deleted: true })
+    await this._alertController.create({
+      header: 'Deseja excluir esse rótulo?',
+      message: 'Após confirmar o rótulo será excluído e não ficará mais disponível para buscas. Essa ação não poderá ser desfeita.',
+      buttons: [
+        {
+          text: 'Sim',
+          handler: async () => {
+            await this._apiService.deleteLabel(id).toPromise()
+            await this._modalController.dismiss({ deleted: true })
+          }
+        },
+        {
+          text: 'Não'
+        }
+      ]
+    }).then(_ => _.present())
   }
 }

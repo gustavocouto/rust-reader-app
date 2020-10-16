@@ -9,8 +9,8 @@
         <ion-label position="floating">Email</ion-label>
         <ion-input type="email" name="email" value="{{email}}" #email></ion-input>
       </ion-item>
-      <small class="error" *ngIf="infoValidator?.validated && infoValidator.validations.email.required.invalid">
-        {{infoValidator.validations.email.required.message}}
+      <small class="error" *ngIf="infoValidator?.validated && infoValidator.validations.email.email.invalid">
+        {{infoValidator.validations.email.email.message}}
       </small>
       <ion-item>
         <ion-label position="floating">Nome</ion-label>
@@ -19,7 +19,7 @@
       <small class="error" *ngIf="infoValidator?.validated && infoValidator.validations.name.range.invalid">
         {{infoValidator.validations.name.range.message}}
       </small>
-      <ion-button color="primary" expand="block" (click)="changeUser()">
+      <ion-button color="primary" expand="block" (click)="changeUser()" [disabled]="loading">
         Alterar Informações
       </ion-button>
     </ion-card-content>
@@ -29,14 +29,14 @@
       <ion-card-title color="primary">Alteração de senha</ion-card-title>
       <ion-item>
         <ion-label position="floating">Senha atual</ion-label>
-        <ion-input type="email" name="email" #password></ion-input>
+        <ion-input type="password" name="email" #password></ion-input>
       </ion-item>
       <small class="error" *ngIf="passValidator?.validated && passValidator.validations.password.minLength.invalid">
         {{passValidator.validations.password.minLength.message}}
       </small>
       <ion-item>
         <ion-label position="floating">Nova senha</ion-label>
-        <ion-input type="email" name="email" #newPassword></ion-input>
+        <ion-input type="password" name="email" #newPassword></ion-input>
       </ion-item>
       <small class="error" *ngIf="passValidator?.validated && passValidator.validations.newPassword.minLength.invalid">
         {{passValidator.validations.newPassword.minLength.message}}
@@ -46,12 +46,12 @@
       </small>
       <ion-item>
         <ion-label position="floating">Repetir nova senha</ion-label>
-        <ion-input type="email" name="email" #repeatNewPassowrd></ion-input>
+        <ion-input type="password" name="email" #repeatNewPassword></ion-input>
       </ion-item>
       <small class="error" *ngIf="passValidator?.validated && passValidator.validations.repeatNewPassword.equals.invalid">
         {{passValidator.validations.repeatNewPassword.equals.message}}
       </small>
-      <ion-button color="primary" expand="block" (click)="changePassword()">
+      <ion-button color="primary" expand="block" (click)="changePassword()" [disabled]="loading">
         Alterar Senha
       </ion-button>
     </ion-card-content>

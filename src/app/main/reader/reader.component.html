@@ -16,18 +16,17 @@
         </div>
     </div>
     <div id="camera-actions" *ngIf="scanned_file">
-        <ion-item>
-            <ion-icon
-                (click)="!scanning && ingredient_reads.length && save()"
-                [color]="!scanning && ingredient_reads.length ? 'success' : ''" slot="end"
-                name="checkmark-circle-outline"></ion-icon>
-            <ion-icon
-                (click)="clearScan()"
-                color="danger" slot="end"
-                name="close-circle-outline"></ion-icon>
-            <ion-input placeholder="Nome do Rótulo"
-                (input)="label_name = $event.target.value"></ion-input>
-        </ion-item>
+        <ion-input placeholder="Nome do Rótulo"
+            (input)="label_name = $event.target.value"></ion-input>
+        <ion-label class="clear" (click)="clearScan()">
+            <ion-icon name="close-circle-outline"></ion-icon>
+        </ion-label>
+        <ion-label class="save"
+            [ngClass]="{'disabled': scanning || loading}"
+            (click)="!scanning && save()"
+            [disabled]="scanning || loading">
+            <ion-icon name="save-outline"></ion-icon>
+        </ion-label>
     </div>
     <div id="scan-result">
         <ion-text *ngIf="!scanned_file" color="dark" class="scan-result-title">

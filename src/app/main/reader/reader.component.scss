@@ -47,11 +47,34 @@
 }
 
 #camera-actions {
+    $height: 40px;
     width: 100%;
+    margin-top: -40px;
+    opacity: 0.8;
+    height: $height;
+    background-color: var(--ion-color-dark-contrast);
 
-    ion-item {
-        margin-top: -49px;
-        opacity: 0.8;
+    ion-input {
+        float: left;
+        height: $height;
+        width: calc(100% - 80px);
+    }
+
+    ion-label {
+        color: var(--ion-color-dark-contrast);
+        font-size: 1.3em;
+        height: $height;
+        width: $height;
+        margin: 0;
+        float: right;
+        line-height: 45px;
+        text-align: center;
+        transition: opacity .2s;
+        border-right: 1px solid var(--ion-color-dark-contrast);
+
+        &.save { background-color: var(--ion-color-primary); }
+        &.clear { background-color: var(--ion-color-danger); }
+        &.disabled { opacity: 0.3; }
     }
 }
 

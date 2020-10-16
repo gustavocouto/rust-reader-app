@@ -104,6 +104,10 @@ export class Validator {
         }
     }
 
+    public reset() {
+        this.validated = false
+    }
+
     public isValid(): boolean {
         this.validated = true
 

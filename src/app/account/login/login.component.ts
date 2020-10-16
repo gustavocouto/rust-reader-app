@@ -60,9 +60,9 @@ export class LoginComponent implements OnInit, AfterViewInit {
       await this.loadIngredients()
       this._router.navigateByUrl('/')
     }
-    catch(responseError) {
+    catch(response) {
       this.loading = false
-      this.notFound = responseError.error[0].user
+      this.notFound = response.error[0].user
     }
   }
 }
