@@ -3,6 +3,7 @@ import { ApiService } from 'src/app/services/api.service';
 import { Router } from '@angular/router';
 import { ContextService } from 'src/app/services/context.service';
 import { Validator, required, email } from 'src/app/services/validator.service';
+import { NavController, ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-login',
@@ -15,15 +16,26 @@ export class LoginComponent implements OnInit, AfterViewInit {
 
   loading: boolean = false
   loadingEnv: boolean = false
-  notFound: string
   validator: Validator
 
   constructor(
     private _router: Router,
     private _contextService: ContextService,
-    private _apiService: ApiService
+    private _apiService: ApiService,
+    private _toastController: ToastController
   ) {
     _contextService.onLoadingChange.subscribe(loading => this.loading = loading)
+    
+    _contextService.onUserRegister.subscribe(registration => {
+      this.email.el.value = registration.email
+      this.password.el.value = registration.password
+      this.login()
+    })
+
+    _contextService.onUserLogout.subscribe(() => {
+      this.email.el.value = ''
+      this.password.el.value = ''
+    })
   }
 
   ngOnInit() { }
@@ -53,16 +65,21 @@ export class LoginComponent implements OnInit, AfterViewInit {
       return
 
     try {
-      this.notFound = undefined
       const response = await this._apiService.auth(this.email.el.value, this.password.el.value).toPromise()
       await this._contextService.changeUser(response.user)
       await this._contextService.storage.setToken(response.token)
       await this.loadIngredients()
+      this.validator.reset()
       this._router.navigateByUrl('/')
     }
     catch(response) {
-      this.loading = false
-      this.notFound = response.error[0].user
+      if(response.error && response.error[0] && response.error[0].user) {
+        await this._toastController
+          .create({ message: 'Usuário e(ou) senha incorreto(s)', duration: 4000 })
+          .then(_ => _.present())
+      } else {
+        throw response
+      }
     }
   }
 }

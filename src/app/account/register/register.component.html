@@ -10,7 +10,7 @@
         </div>
         <ion-card>
             <ion-card-content>
-                <app-profile-picture></app-profile-picture>
+                <app-profile-picture [monsterName]="monsterName" (click)="changeMonster()"></app-profile-picture>
                 <ion-item>
                     <ion-label position="floating">Nome</ion-label>
                     <ion-input type="text" name="name" #name

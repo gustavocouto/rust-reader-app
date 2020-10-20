@@ -39,6 +39,7 @@ export class MainComponent implements OnInit {
 
   logout() {
     this.context.storage.clear()
+    this.context.setLogout()
     this._router.navigateByUrl('/account/login')
   }
 }

@@ -25,9 +25,9 @@ export class ReaderComponent {
     private _toastController: ToastController,
     private _backgroundMode: BackgroundMode,
     private _alertController: AlertController) {
-    _apiService
-      .readImageFile(`${window.location.origin}/assets/images/rotulo.jpg`, 'image.jpg', 'image/jpeg')
-      .subscribe(file => this.setScan(file))
+    // _apiService
+    //   .readImageFile(`${window.location.origin}/assets/images/rotulo.jpg`, 'image.jpg', 'image/jpeg')
+    //   .subscribe(file => this.setScan(file))
   }
 
   async capture(sourceType: number) {

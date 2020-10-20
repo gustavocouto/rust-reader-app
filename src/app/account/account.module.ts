@@ -8,6 +8,7 @@ import { RegisterComponent } from './register/register.component';
 import { ProfilePictureComponent } from '../components/profile-picture/profile-picture.component';
 import { IonicStorageModule } from '@ionic/storage';
 import { AccountComponent } from './account.component';
+import { MonsterListComponent } from '../components/monster-list/monster-list.component';
 
 @NgModule({
   imports: [
@@ -19,7 +20,9 @@ import { AccountComponent } from './account.component';
   declarations: [
     AccountComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    ProfilePictureComponent,
+    MonsterListComponent
   ],
   bootstrap: [AccountComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]

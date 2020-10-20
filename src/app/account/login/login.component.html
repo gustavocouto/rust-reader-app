@@ -31,17 +31,14 @@
         <ion-button type="button" color="primary" expand="block" (click)="login()" [disabled]="loading || loadingEnv">
           Login
         </ion-button>
-        <ion-text color="danger" *ngIf="notFound" class="not-found">
-          Usuário ou senha incorreto
-        </ion-text>
       </ion-card-content>
     </ion-card>
     <div class="footer">
       <ion-router-link [routerLink]="loading || loadingEnv ? [] : ['/account/register']"
        [color]="loading || loadingEnv ? 'medium' : 'primary'">Registre-se</ion-router-link>
     </div>
-    <div class="config-env" *ngIf="loadingEnv">
-      <h3>Configurando ambiente</h3>
+    <div class="config-env" *ngIf="loadingEnv || loading">
+      <h3>{{loadingEnv ? 'Configurando ambiente' : 'Aguarde...'}}</h3>
       <ion-spinner color="primary"></ion-spinner>
     </div>
   </div>

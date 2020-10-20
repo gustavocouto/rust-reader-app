@@ -25,8 +25,8 @@ export class ApiService {
         return this._http.put('/auth', { old_password: oldPassword, new_password: newPassword })
     }
 
-    register(name: string, email: string, password: string): Observable<any> {
-        return this._http.post('/users', { name, email, password })
+    register(name: string, email: string, password: string, monsterName: string): Observable<any> {
+        return this._http.post('/users', { name, email, password, monster_name: monsterName })
     }
 
     changeUser(user: IUser): Observable<any> {
@@ -79,7 +79,6 @@ export class ApiService {
     getAllIngredients(): Observable<IIngredient[]> {
         return this._http.get('/assets/ingredients.txt', { responseType: 'text' })
             .pipe(map<string, IIngredient[]>(text => {
-                debugger
                 const lines = text.split('\n').slice(1)
                 const ingredientsLines = lines.map(_ => _.split('|'))
                 return ingredientsLines.map(line => {

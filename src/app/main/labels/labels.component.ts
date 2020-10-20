@@ -28,7 +28,7 @@ export class LabelsComponent implements OnInit {
     await this.filter()
   }
 
-  private async filter(search?: string) {
+  public async filter(search?: string) {
     this.lastSearch = search
     this.labels = await this._apiService.getLabels(this.strict, search).toPromise()
     this.searched = true

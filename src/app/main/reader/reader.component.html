@@ -22,9 +22,9 @@
             <ion-icon name="close-circle-outline"></ion-icon>
         </ion-label>
         <ion-label class="save"
-            [ngClass]="{'disabled': scanning || loading}"
+            [ngClass]="{'disabled': scanning}"
             (click)="!scanning && save()"
-            [disabled]="scanning || loading">
+            [disabled]="scanning">
             <ion-icon name="save-outline"></ion-icon>
         </ion-label>
     </div>

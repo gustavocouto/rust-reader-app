@@ -96,6 +96,10 @@ export class SettingsComponent implements AfterViewInit {
         await this._toastController
           .create({ message: response.error.password, duration: 4000 })
           .then(_ => _.present())
+      } else if (response.error && response.error.email) {
+        await this._toastController
+          .create({ message: response.error.email[0], duration: 4000 })
+          .then(_ => _.present())
       }
     }
   }

@@ -10,11 +10,5 @@
     }
   },
   "cordova": {},
-  "linuxAndroidStudioPath": "/home/gustavocouto/android-studio/bin/studio.sh",
-  "server": {
-    "url": "http://192.168.1.40:8100",
-    "cleartext": true,
-    "originalUrl": "http://192.168.2.118:8100",
-    "originalCleartext": true
-  }
+  "linuxAndroidStudioPath": "/home/gustavocouto/android-studio/bin/studio.sh"
 }
