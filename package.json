@@ -46,12 +46,13 @@
     "@angular/compiler": "^9.1.12",
     "@angular/compiler-cli": "^9.1.12",
     "@angular/language-service": "^9.1.12",
-    "@capacitor/cli": "2.2.1",
+    "@capacitor/cli": "^2.2.1",
     "@ionic/angular-toolkit": "^2.3.3",
     "@types/jasmine": "^3.5.14",
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "^12.12.67",
     "codelyzer": "^5.1.2",
+    "cordova-android": "^9.0.0",
     "cordova-plugin-device": "^2.0.3",
     "cordova-plugin-ionic-keyboard": "^2.2.0",
     "cordova-plugin-ionic-webview": "^4.2.1",
@@ -81,7 +82,12 @@
       "cordova-plugin-ionic-webview": {
         "ANDROID_SUPPORT_ANNOTATIONS_VERSION": "27.+"
       },
-      "cordova-plugin-ionic-keyboard": {}
+      "cordova-plugin-ionic-keyboard": {},
+      "cordova-plugin-foreground-service": {},
+      "cordova-plugin-background-mode": {},
+      "cordova-plugin-camera": {
+        "ANDROID_SUPPORT_V4_VERSION": "27.+"
+      }
     },
     "platforms": [
       "android"
