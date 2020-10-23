@@ -15,8 +15,8 @@ export class MainComponent implements OnInit {
   loading: boolean
   route_icons = {
     '/reader': 'barcode-outline',
-    '/labels': 'cube-outline',
-    '/preferences': 'grid-outline',
+    '/labels': 'list-outline',
+    '/preferences': 'flask-outline',
     '/settings': 'person-outline'
   }
 

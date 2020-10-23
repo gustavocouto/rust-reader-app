@@ -34,8 +34,17 @@ export class IngredientListComponent implements OnInit {
       })
   }
 
-  isPriorityAllergenic(name: string) {
-    return this._contextService.isPriorityAllergenic(name)
+  isPriorityAllergenic(read: IIngredientRead) {
+    const match = read && read.best_match;
+    return this._contextService.isPriorityAllergenic(match && match.name)
+      || this._contextService.isPriorityAllergenic(match && match.derived_from && match.derived_from.name) 
+  }
+
+  getAccuracyDisplay(accuracy: number) {
+    if(accuracy < environment.readThreshold.unmatch[1])
+      return `Score Points: ${environment.readThreshold.unmatch[1] * -1}+`
+    else
+      return `Score Points: ${accuracy * -1}`
   }
 
   getAccuracyColor(read: IIngredientRead) {

@@ -1,12 +1,47 @@
 ion-list.read-list {
     background: transparent;
-    
+ 
+    .item-content {
+        display: block;
+
+        &:last-of-type {
+            margin-top: 2px;
+        }
+    }
+
+    .icon-content {
+        width: 30px;
+        display: inline-block;
+
+        ion-icon {
+            position: absolute;
+            margin-top: -17px;
+        }
+    }
+
+    .text-content {
+        width: calc(100% - 30px);
+        display: inline-block;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
     .bookmark {
         margin-left: 5px;
+        font-size: 0.8em;
     }
 
     .accuracy {
-        float: right;
+        font-size: 0.8em;
+        margin-top: 5px;
+        display: block;
+        text-align: center;
+    }
+
+    ion-item {
+        &:first-child { border-radius: 4px 4px 0 0; }
+        &:last-child { border-radius: 0 0 4px 4px; }
     }
 }
 

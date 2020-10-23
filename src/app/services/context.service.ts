@@ -21,7 +21,7 @@ export class ContextService {
     public ingredients: IIngredient[] = []
 
     constructor(public storage: StorageService) {
-
+        
     }
 
     setUserRegister(email: string, password: string) {

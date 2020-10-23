@@ -1,5 +1,3 @@
-
-
 #app-reader {
     height: 100%;
     display: block;
@@ -39,9 +37,13 @@
             }
         }
 
-        img {
+        .img-content {
             height: 100%;
-            width: auto;
+            width: 100%;
+            background-position: center;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-color: #1b1b1b;
         }
     }
 }
@@ -79,9 +81,9 @@
 }
 
 #scan-result {
-    padding: 12px;
     height: calc(100% - 40vh);
     overflow-y: scroll;
+    padding: 0 8px 0 8px;
 
     .scan-result-title p {
         text-align: center;

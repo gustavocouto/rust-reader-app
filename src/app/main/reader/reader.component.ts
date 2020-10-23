@@ -63,7 +63,7 @@ export class ReaderComponent {
       }).then(_ => _.present())
 
     await this._apiService.addLabel({ name: this.label_name, ingredients: this.ingredient_reads }).toPromise()
-    this.clearScan()
+    this.clearScan(true)
 
     await this._toastController.create({
       message: 'Informações do rótulo salvas.',
@@ -85,22 +85,22 @@ export class ReaderComponent {
     this.scanning = false
   }
 
-  async clearScan() {
+  async clearScan(forceClear?: boolean) {
+    const handler = () => {
+      this.scanning = false
+      this.scanned_file = null
+      this.scanned_file_base64 = null
+      this.ingredient_reads = []
+    }
+
+    if(forceClear)
+      return handler()
+
     await this._alertController.create({
       header: 'Deseja cancelar a leitura?',
       buttons: [
-        {
-          text: 'Sim',
-          handler: () => {
-            this.scanning = false
-            this.scanned_file = null
-            this.scanned_file_base64 = null
-            this.ingredient_reads = []
-          }
-        },
-        {
-          text: 'Não'
-        }
+        { text: 'Sim', handler },
+        { text: 'Não' }
       ]
     }).then(_ => _.present())
   }

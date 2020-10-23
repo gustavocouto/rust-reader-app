@@ -1,8 +1,8 @@
 <div id="app-reader">
     <div id="camera-preview" #cameraPreview >
-        <div id="camera-text-content"
-            [ngStyle]="scanned_file_base64 ? {'background-image': 'url(' + scanned_file_base64 + ')'} : {'background-color': '#000'}">
-            <img *ngIf="scanned_file" [src]="scanned_file_base64" />
+        <div id="camera-text-content" [ngStyle]="{'background-color': '#000'}">
+            <div *ngIf="scanned_file_base64" class="img-content"
+                [ngStyle]="{'background-image': 'url(' + scanned_file_base64 + ')'} "></div>
             <div class="no-capture" *ngIf="!scanned_file"
                 (click)="capture(1)" color="medium">
                 <ion-icon name="camera-outline"></ion-icon>
