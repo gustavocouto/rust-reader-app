@@ -15,11 +15,16 @@ export class IngredientListComponent implements OnInit {
 
   ngOnInit() {}
 
+  getAccuracy(read: IIngredientRead) {
+    const priorityAllergenic = this.isPriorityAllergenic(read)
+    return priorityAllergenic ? read.accuracy + 1576 : read.accuracy
+  }
+
   getSortedIngredients() {
     return this.ingredient_reads
       .filter(ingredient => ingredient.accuracy != environment.readThreshold.unmatch[0])
       .sort((left, right) => {
-        return left.accuracy > right.accuracy ? -1 : 1
+        return this.getAccuracy(left) > this.getAccuracy(right) ? -1 : 1
       })
       .sort((left, right) => {
         if (!this._contextService.user || this._contextService.user.priority_allergenics)
@@ -40,19 +45,33 @@ export class IngredientListComponent implements OnInit {
       || this._contextService.isPriorityAllergenic(match && match.derived_from && match.derived_from.name) 
   }
 
-  getAccuracyDisplay(accuracy: number) {
+  getAccuracyDisplay(read: IIngredientRead) {
+    const accuracy = this.getAccuracy(read)
     if(accuracy < environment.readThreshold.unmatch[1])
-      return `Score Points: ${environment.readThreshold.unmatch[1] * -1}+`
+      return `Risco 0`
     else
-      return `Score Points: ${accuracy * -1}`
+      return `Risco ${Math.floor((((environment.readThreshold.unmatch[1] - accuracy) * -1) / 3.1576))}`
+  }
+
+  getAccuracyDescription(read: IIngredientRead) {
+    const accuracy = this.getAccuracy(read)
+    if(accuracy > environment.readThreshold.match[1])
+      return 'Risco extremo'
+    if (accuracy > environment.readThreshold.match[0] && accuracy <= environment.readThreshold.match[1])
+      return 'Risco provável'
+    if (accuracy > environment.readThreshold.undef[0] && accuracy <= environment.readThreshold.undef[1])
+      return 'Leitura inconcludente'
+    if (accuracy > environment.readThreshold.unmatch[0] && accuracy <= environment.readThreshold.unmatch[1])
+      return 'Sem riscos'
   }
 
   getAccuracyColor(read: IIngredientRead) {
-    if (read.accuracy > environment.readThreshold.match[0] && read.accuracy <= environment.readThreshold.match[1])
+    const accuracy = this.getAccuracy(read)
+    if (accuracy > environment.readThreshold.match[0])
       return 'danger'
-    if (read.accuracy > environment.readThreshold.undef[0] && read.accuracy <= environment.readThreshold.undef[1])
+    if (accuracy > environment.readThreshold.undef[0] && accuracy <= environment.readThreshold.undef[1])
       return 'warning'
-    if (read.accuracy > environment.readThreshold.unmatch[0] && read.accuracy <= environment.readThreshold.unmatch[1])
+    if (accuracy > environment.readThreshold.unmatch[0] && accuracy <= environment.readThreshold.unmatch[1])
       return 'success'
   }
 }

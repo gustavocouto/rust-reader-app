@@ -17,7 +17,6 @@ export class IngredientService {
     }
 
     async findIngredientsMatches(text: string): Promise<IIngredientRead[]> {
-        const threshold = environment.readThreshold.unmatch[0]
         const ingredients = this._contextService.ingredients
         const ingredientsToCheck = text.replace(/[^a-z0-9-)( ]/gi,',').split(',')
         const matchesPromises = ingredientsToCheck.map(i => {

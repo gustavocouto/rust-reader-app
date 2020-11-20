@@ -22,7 +22,7 @@
                     </ion-text>
                 </div>
                 <ion-text [color]="getAccuracyColor(read)" class="accuracy">
-                    {{getAccuracyDisplay(read.accuracy)}}
+                    {{getAccuracyDisplay(read)}}<span class="accuracy-description">. {{getAccuracyDescription(read)}}.</span>
                 </ion-text>
             </ion-label>
         </ion-item>

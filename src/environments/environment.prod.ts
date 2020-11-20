@@ -5,5 +5,5 @@ export const environment = {
     undef: [-30000, -1000],
     unmatch: [-Infinity, -30000]
   },
-  apiUrl: 'https://rustreader.herokuapp.com/api'
+  apiUrl: 'https://rustreader.azurewebsites.net/api'
 };

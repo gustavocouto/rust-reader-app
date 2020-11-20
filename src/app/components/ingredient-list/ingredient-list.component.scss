@@ -1,5 +1,6 @@
 ion-list.read-list {
     background: transparent;
+    margin-bottom: 5px;
  
     .item-content {
         display: block;
@@ -15,7 +16,7 @@ ion-list.read-list {
 
         ion-icon {
             position: absolute;
-            margin-top: -17px;
+            margin-top: -18px;
         }
     }
 
@@ -36,7 +37,10 @@ ion-list.read-list {
         font-size: 0.8em;
         margin-top: 5px;
         display: block;
-        text-align: center;
+
+        .accuracy-description {
+            color: var(--ion-color-medium);
+        }
     }
 
     ion-item {
